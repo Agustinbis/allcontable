@@ -283,8 +283,31 @@
     .globo-body{padding:18px 22px 28px;}
     .stik .cur{display:none;}
     .table-scroll .tbl{min-width:440px;}
+    .tbl td{padding:12px 0;font-size:14px;}
+    .tbl th{font-size:10px;letter-spacing:.08em;}
+    .tbl td.amt,.tbl td.r,.tbl th.r{white-space:nowrap;}
     .scroll-hint{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
       text-transform:uppercase;color:var(--ink-faint);margin:0 0 6px;}
+  }
+
+  @media (max-width:560px){
+    .table-scroll{overflow:visible;}
+    .rtbl{min-width:0 !important;}
+    .rtbl thead{display:none;}
+    .rtbl,.rtbl tbody{display:block;width:100%;}
+    .rtbl tr{display:block;padding:13px 2px;border-bottom:1px solid var(--hair);}
+    .rtbl tr:last-child{border-bottom:0;}
+    .rtbl tr.hl{background:var(--ink);border-radius:6px;padding:14px;border-bottom:0;margin:4px 0;}
+    .rtbl tr.hl td,.rtbl tr.hl td .strong,.rtbl tr.hl td.status{color:#fff;}
+    .rtbl td{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+      padding:5px 0;border:0;font-size:14.5px;text-align:right;background:none !important;white-space:nowrap;}
+    .rtbl td::before{content:attr(data-l);font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--ink-faint);white-space:nowrap;text-align:left;font-weight:700;}
+    .rtbl tr.hl td::before{color:rgba(255,255,255,.72);}
+    .rtbl td.k{color:var(--ink-soft);font-size:13px;white-space:normal;}
+    .rtbl td.status{white-space:normal;}
+    .rtbl td:first-child{font-weight:800;font-size:16px;margin-bottom:6px;justify-content:flex-start;white-space:normal;}
+    .rtbl td:first-child::before{display:none;}
   }
 
   @media (max-width:430px){
@@ -415,13 +438,13 @@
         <div class="row"><span>14/03 RET IIBB SIRCREB</span><span>21.744,08</span></div>
         <div class="more">…184 movimientos</div>
       </div>
-      <table class="tbl">
+      <table class="tbl rtbl">
         <thead><tr><th>Fecha</th><th>Concepto</th><th>Rubro</th><th class="r">Importe</th></tr></thead>
         <tbody>
-          <tr><td class="num-tab">02/03</td><td>Transferencia recibida</td><td class="k">Cobranzas</td><td class="r amt">1,5M</td></tr>
-          <tr><td class="num-tab">05/03</td><td>Pago proveedores</td><td class="k">Compras</td><td class="r amt neg">(0,6M)</td></tr>
-          <tr><td class="num-tab">11/03</td><td>Depósito cheque</td><td class="k">Cobranzas</td><td class="r amt">0,9M</td></tr>
-          <tr><td class="num-tab">19/03</td><td>Transferencia enviada</td><td class="k">Pagos</td><td class="r amt neg">(0,4M)</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">02/03</td><td data-l="Concepto">Transferencia recibida</td><td class="k" data-l="Rubro">Cobranzas</td><td class="r amt" data-l="Importe">1,5M</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">05/03</td><td data-l="Concepto">Pago proveedores</td><td class="k" data-l="Rubro">Compras</td><td class="r amt neg" data-l="Importe">(0,6M)</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">11/03</td><td data-l="Concepto">Depósito cheque</td><td class="k" data-l="Rubro">Cobranzas</td><td class="r amt" data-l="Importe">0,9M</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">19/03</td><td data-l="Concepto">Transferencia enviada</td><td class="k" data-l="Rubro">Pagos</td><td class="r amt neg" data-l="Importe">(0,4M)</td></tr>
         </tbody>
       </table>
     </div>
@@ -448,13 +471,13 @@
         <div class="chip"><span class="t">FACTURA B</span><span class="m">servicios</span></div>
         <div class="more" style="font-family:var(--mono);font-size:12px;color:var(--ink-faint);">…comprobantes del mes</div>
       </div>
-      <table class="tbl">
+      <table class="tbl rtbl">
         <thead><tr><th>Fecha</th><th>Proveedor</th><th class="r">Neto</th><th class="r">IVA</th><th class="r">Total</th></tr></thead>
         <tbody>
-          <tr><td class="num-tab">04/03</td><td>Proveedor mayorista</td><td class="r amt">1,2M</td><td class="r amt">0,3M</td><td class="r amt">1,5M</td></tr>
-          <tr><td class="num-tab">07/03</td><td>Insumos</td><td class="r amt">0,8M</td><td class="r amt">0,2M</td><td class="r amt">1,0M</td></tr>
-          <tr><td class="num-tab">15/03</td><td>Nota de crédito</td><td class="r amt neg">(0,4M)</td><td class="r amt neg">(0,1M)</td><td class="r amt neg">(0,5M)</td></tr>
-          <tr><td class="num-tab">21/03</td><td>Servicios</td><td class="r amt">0,6M</td><td class="r amt">0,1M</td><td class="r amt">0,7M</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">04/03</td><td data-l="Proveedor">Proveedor mayorista</td><td class="r amt" data-l="Neto">1,2M</td><td class="r amt" data-l="IVA">0,3M</td><td class="r amt" data-l="Total">1,5M</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">07/03</td><td data-l="Proveedor">Insumos</td><td class="r amt" data-l="Neto">0,8M</td><td class="r amt" data-l="IVA">0,2M</td><td class="r amt" data-l="Total">1,0M</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">15/03</td><td data-l="Proveedor">Nota de crédito</td><td class="r amt neg" data-l="Neto">(0,4M)</td><td class="r amt neg" data-l="IVA">(0,1M)</td><td class="r amt neg" data-l="Total">(0,5M)</td></tr>
+          <tr><td class="num-tab" data-l="Fecha">21/03</td><td data-l="Proveedor">Servicios</td><td class="r amt" data-l="Neto">0,6M</td><td class="r amt" data-l="IVA">0,1M</td><td class="r amt" data-l="Total">0,7M</td></tr>
         </tbody>
       </table>
     </div>
@@ -474,13 +497,13 @@
     <p class="lead">Cada persona del equipo carga sus horas por cliente. El sistema las cruza con los sueldos y las pone contra lo facturado: aparece el margen real de cada uno.</p>
     <p class="scroll-hint" style="margin-top:24px;">Deslizá la tabla →</p>
     <div class="table-scroll" style="margin-top:24px;">
-    <table class="tbl">
+    <table class="tbl rtbl">
       <thead><tr><th>Cliente</th><th class="r">Horas</th><th class="r">Costo</th><th class="r">Facturado</th><th class="r">Margen</th></tr></thead>
       <tbody>
-        <tr><td>Cliente A</td><td class="r amt">12</td><td class="r amt neg">(0,4M)</td><td class="r amt">1,0M</td><td class="r"><span class="strong">63%</span></td></tr>
-        <tr><td>Cliente B</td><td class="r amt">42</td><td class="r amt neg">(1,3M)</td><td class="r amt">2,4M</td><td class="r"><span class="strong">47%</span></td></tr>
-        <tr class="hl"><td><span class="strong">Cliente C</span></td><td class="r amt">58</td><td class="r amt">(1,7M)</td><td class="r amt">1,5M</td><td class="r status">−16% · REVISAR</td></tr>
-        <tr><td>Cliente D</td><td class="r amt">33</td><td class="r amt neg">(1,0M)</td><td class="r amt">1,7M</td><td class="r"><span class="strong">42%</span></td></tr>
+        <tr><td data-l="Cliente">Cliente A</td><td class="r amt" data-l="Horas">12</td><td class="r amt neg" data-l="Costo">(0,4M)</td><td class="r amt" data-l="Facturado">1,0M</td><td class="r" data-l="Margen"><span class="strong">63%</span></td></tr>
+        <tr><td data-l="Cliente">Cliente B</td><td class="r amt" data-l="Horas">42</td><td class="r amt neg" data-l="Costo">(1,3M)</td><td class="r amt" data-l="Facturado">2,4M</td><td class="r" data-l="Margen"><span class="strong">47%</span></td></tr>
+        <tr class="hl"><td data-l="Cliente"><span class="strong">Cliente C</span></td><td class="r amt" data-l="Horas">58</td><td class="r amt" data-l="Costo">(1,7M)</td><td class="r amt" data-l="Facturado">1,5M</td><td class="r status" data-l="Margen">−16% · REVISAR</td></tr>
+        <tr><td data-l="Cliente">Cliente D</td><td class="r amt" data-l="Horas">33</td><td class="r amt neg" data-l="Costo">(1,0M)</td><td class="r amt" data-l="Facturado">1,7M</td><td class="r" data-l="Margen"><span class="strong">42%</span></td></tr>
       </tbody>
     </table>
     </div>
