@@ -25,6 +25,7 @@
     line-height:1.5;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 34px;}
   section{padding:80px 0;}
+  .quehago{padding-top:120px;}
 
   h1,h2,h3{margin:0;letter-spacing:-.025em;font-weight:800;line-height:1.03;text-wrap:balance;}
   h1{font-size:clamp(46px,8.2vw,90px);font-weight:900;letter-spacing:-.035em;line-height:.98;}
@@ -260,6 +261,7 @@
   @media (max-width:820px){
     .wrap{padding:0 20px;}
     section{padding:52px 0;}
+    .quehago{padding-top:52px;}
     .band,.final{grid-template-columns:1fr;}
     .band .g,.band .card{padding:28px 22px;}
     .cta{width:100%;text-align:center;min-height:50px;display:flex;align-items:center;justify-content:center;}
@@ -283,6 +285,19 @@
     .table-scroll .tbl{min-width:560px;}
     .scroll-hint{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
       text-transform:uppercase;color:var(--ink-faint);margin:0 0 6px;}
+  }
+
+  @media (max-width:430px){
+    h1{font-size:clamp(34px,10.5vw,46px);}
+    section{padding:40px 0;}
+    .quehago{padding-top:40px;}
+    .wrap{padding:0 16px;}
+    .idx{gap:12px;}
+    .idx-t{font-size:15px;}
+    .band .g h3,.final h2{font-size:22px;}
+    .globo-head h2{font-size:21px;}
+    .globo-head{padding:22px 54px 10px 18px;}
+    .globo-body{padding:16px 18px 26px;}
   }
 </style>
 
@@ -326,7 +341,7 @@
 </header>
 
 <!-- QUÉ HAGO -->
-<section class="wrap" style="padding-top:120px;">
+<section class="wrap quehago">
   <div class="masthead" style="padding-top:0;">
     <p class="eyebrow" style="color:var(--ink);">Qué hago</p>
     <p class="eyebrow yr">Consultoría · Automatización · Análisis de datos</p>
@@ -369,7 +384,7 @@
     <div class="right">
       <div class="name">CP. Agustín M. Bisonni</div>
       <div class="role">Contador Público · Consultor en gestión e impuestos</div>
-      <a class="cta" href="#empezar">Solicitar el diagnóstico →</a>
+      <a class="cta" href="https://wa.me/5493467630602?text=Hola%20Agust%C3%ADn%2C%20quiero%20empezar%20el%20diagn%C3%B3stico" target="_blank" rel="noopener">Escribime por WhatsApp →</a>
     </div>
   </div>
 </section>
