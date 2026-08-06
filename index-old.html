@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllContable · Tus papeles ya tienen la respuesta</title>
+<meta name="description" content="Servicios de información contable para PYMES. Con tu propia documentación se arma información para decidir — y detectar lo que se pasó por alto.">
+<meta property="og:title" content="Tus papeles ya tienen la respuesta">
+<meta property="og:description" content="Facturación, Libros IVA, extractos y DDJJ ya existen en tu empresa. Con eso se arma información para decidir.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14140f;
+    --ink-soft:#5c5c55;
+    --ink-faint:#8f8f88;
+    --green:#1a7a45;
+    --green-dark:#15683c;
+    --paper:#ffffff;
+    --panel:#f1f0ec;
+    --panel-line:#e2e1db;
+    --line:#14140f;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  section{padding:88px 0;}
+
+  /* Typography */
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--green);
+    font-weight:700;
+    margin:0;
+  }
+  .eyebrow.muted{color:var(--ink-soft);}
+  h1,h2,h3{margin:0;letter-spacing:-.02em;font-weight:800;line-height:1.02;}
+  h1{font-size:clamp(48px,8.5vw,92px);font-weight:900;}
+  h2{font-size:clamp(32px,5vw,52px);}
+  h3{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.2;}
+  p{margin:0;}
+  .lead{
+    font-size:clamp(18px,2.2vw,22px);
+    line-height:1.5;
+    color:var(--ink);
+    max-width:640px;
+    font-weight:400;
+  }
+  .green{color:var(--green);}
+  .rule{height:3px;background:var(--line);border:0;margin:0;}
+  .rule-thin{height:1px;background:var(--panel-line);border:0;margin:0;}
+
+  /* Top bar */
+  .topbar{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:28px 0 18px;
+  }
+  .topbar .eyebrow{color:var(--ink);}
+  .topbar .year{color:var(--green);}
+
+  /* Hero */
+  .hero{padding-top:8px;padding-bottom:0;}
+  .hero h1 span{display:block;}
+  .hero .lead{margin-top:34px;}
+  .hero .rule{margin-top:56px;}
+
+  /* Numbered features grid */
+  .features{
+    display:grid;grid-template-columns:1fr 1fr;gap:44px 64px;
+    padding:52px 0 0;
+  }
+  .feat .num{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;
+    color:var(--green);font-weight:700;margin-bottom:12px;
+  }
+  .feat h3{margin-bottom:8px;}
+  .feat p{color:var(--ink-soft);font-size:15px;line-height:1.5;max-width:42ch;}
+
+  /* CTA green band */
+  .band{
+    display:grid;grid-template-columns:1.4fr 1fr;gap:0;
+    margin-top:64px;overflow:hidden;
+  }
+  .band .g{
+    background:var(--green);color:#fff;padding:38px 40px;
+  }
+  .band .g .eyebrow{color:rgba(255,255,255,.8);}
+  .band .g h3{color:#fff;font-size:clamp(22px,3vw,30px);font-weight:800;margin-top:14px;line-height:1.15;letter-spacing:-.015em;}
+  .band .card{
+    background:var(--panel);padding:38px 40px;display:flex;flex-direction:column;justify-content:center;
+  }
+  .band .card .name{font-weight:800;font-size:17px;}
+  .band .card .role{color:var(--ink-soft);font-size:14px;margin-top:4px;}
+  .band .card .cta{
+    margin-top:18px;align-self:flex-start;
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.05em;
+    background:var(--ink);color:#fff;text-decoration:none;
+    padding:12px 20px;font-weight:700;transition:background .15s;
+  }
+  .band .card .cta:hover{background:var(--green);}
+
+  /* Section header */
+  .sec-head{margin-bottom:8px;}
+  .sec-head .eyebrow{margin-bottom:20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  .sec-head .eyebrow .idx{color:var(--green);}
+  .sec-head .eyebrow .label{color:var(--ink);}
+  .sec-head h2{margin-top:22px;}
+  .sec-head .lead{margin-top:20px;}
+
+  /* Horizontal scroll wrapper for wide tables */
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .scroll-hint{display:none;}
+
+  /* Demo tag */
+  .demo-tag{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--ink-faint);margin-top:14px;
+  }
+
+  /* Supported-banks list */
+  .banklist{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;}
+  .banklist span{
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.04em;
+    border:1px solid var(--ink);padding:9px 14px;font-weight:700;line-height:1;
+  }
+
+  /* Two-col bank demo */
+  .bank-demo{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;margin-top:44px;align-items:start;}
+  .statement{
+    border:1px solid var(--ink);padding:24px 22px;
+    font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.9;color:var(--ink);
+  }
+  .statement .st-head{font-weight:700;letter-spacing:.12em;font-size:11px;margin-bottom:16px;line-height:1.6;}
+  .statement .row{display:flex;justify-content:space-between;gap:12px;}
+  .statement .more{color:var(--ink-faint);margin-top:14px;}
+  table{width:100%;border-collapse:collapse;}
+  .tbl th{
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:400;text-align:left;padding:0 0 14px;
+    border-bottom:2px solid var(--ink);
+  }
+  .tbl th.r,.tbl td.r{text-align:right;}
+  .tbl td{padding:15px 0;border-bottom:1px solid var(--panel-line);font-size:15px;}
+  .tbl td.rubro{color:var(--ink-soft);}
+  .tbl td.amt{font-variant-numeric:tabular-nums;font-weight:700;}
+  .tbl td.amt.neg{color:var(--ink-faint);font-weight:400;}
+
+  /* Big stat */
+  .stat{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;margin-top:52px;padding-top:40px;border-top:3px solid var(--ink);}
+  .stat .big{font-size:clamp(64px,11vw,120px);font-weight:900;color:var(--green);line-height:.85;letter-spacing:-.03em;}
+  .stat p{font-size:clamp(17px,2.2vw,22px);max-width:30ch;}
+
+  /* Bar chart (monthly) */
+  .chart{margin-top:48px;}
+  .chart-grid{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:10px;
+    align-items:end;height:340px;border-bottom:1px solid var(--panel-line);
+    position:relative;padding-top:8px;
+  }
+  .bar{background:var(--ink);width:100%;position:relative;border-radius:1px;}
+  .bar.dim{background:#c9c8c2;}
+  .bar .cap{position:absolute;top:-4px;left:0;right:0;height:4px;background:var(--green);}
+  .chart-x{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;margin-top:12px;}
+  .chart-x .m{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-align:center;color:var(--ink-soft);}
+  .chart-x .pct{font-size:13px;font-weight:700;text-align:center;margin-top:6px;font-variant-numeric:tabular-nums;}
+  .chart-x .pct.warn{color:var(--green);}
+  .legend{display:flex;gap:24px;align-items:center;margin-top:24px;flex-wrap:wrap;}
+  .legend span{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);}
+  .legend .sw{width:14px;height:14px;display:inline-block;}
+  .legend .sw.ink{background:var(--ink);}
+  .legend .sw.grn{background:var(--green);}
+  .legend .spacer{margin-left:auto;}
+
+  /* Insight line */
+  .insight{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start;margin-top:48px;padding-top:34px;border-top:3px solid var(--ink);}
+  .insight .eyebrow{padding-top:4px;}
+  .insight p{font-size:clamp(19px,2.6vw,26px);font-weight:800;letter-spacing:-.01em;line-height:1.2;max-width:46ch;}
+
+  /* Report table */
+  .rep-tbl td.hl-row,.rep-tbl tr.hl{background:var(--ink);color:#fff;}
+  .rep-tbl tr.hl td{color:#fff;border-color:var(--ink);}
+  .rep-tbl td .strong{font-weight:800;}
+
+  /* three cols */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border-top:3px solid var(--ink);padding-top:34px;}
+  .three .col{padding:0 28px;border-left:1px solid var(--panel-line);}
+  .three .col:first-child{padding-left:0;border-left:0;}
+  .three .col .eyebrow{margin-bottom:12px;}
+  .three .col p{color:var(--ink-soft);font-size:15px;line-height:1.5;}
+
+  /* IVA cross table */
+  .iva-tbl tr.revisar td{background:var(--green);color:#fff;font-weight:700;border-color:var(--green);}
+  .iva-tbl td.status{text-align:right;color:var(--ink-soft);}
+  .iva-tbl tr.revisar td.status{color:#fff;letter-spacing:.1em;font-family:'Space Mono',monospace;font-size:13px;}
+
+  /* horizontal bars (clientes) */
+  .hbars{margin-top:44px;}
+  .hbar{display:grid;grid-template-columns:120px 1fr 70px;gap:20px;align-items:center;padding:14px 0;border-bottom:1px solid var(--panel-line);}
+  .hbar .lbl{font-weight:800;font-size:15px;}
+  .hbar .track{height:26px;background:var(--panel);position:relative;}
+  .hbar .fill{height:100%;background:var(--green);}
+  .hbar .fill.ink{background:var(--ink);}
+  .hbar .fill.grey{background:#c9c8c2;}
+  .hbar .val{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;padding-top:34px;border-top:3px solid var(--ink);}
+  .steps .col{padding:0 32px;border-left:1px solid var(--panel-line);}
+  .steps .col:first-child{padding-left:0;border-left:0;}
+  .steps .col h3{margin:10px 0 12px;font-size:26px;font-weight:800;}
+  .steps .col p{color:var(--ink-soft);font-size:15px;line-height:1.55;}
+
+  /* why me */
+  .why{margin-top:80px;}
+  .why h2{font-size:clamp(30px,4.5vw,44px);}
+  .why p{font-size:clamp(17px,2vw,20px);max-width:720px;margin-top:22px;line-height:1.55;}
+  .confid{background:var(--panel);padding:28px 32px;margin-top:36px;display:grid;grid-template-columns:200px 1fr;gap:24px;}
+  .confid .eyebrow{color:var(--ink-soft);padding-top:2px;}
+  .confid p{color:var(--ink-soft);font-size:15px;line-height:1.6;max-width:64ch;}
+
+  /* final band */
+  .final{background:var(--green);color:#fff;margin-top:56px;padding:52px 48px;display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:center;}
+  .final .eyebrow{color:rgba(255,255,255,.8);margin-bottom:16px;}
+  .final h2{color:#fff;font-size:clamp(26px,3.6vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.015em;}
+  .final .right{text-align:right;}
+  .final .name{font-weight:800;font-size:18px;}
+  .final .role{color:rgba(255,255,255,.82);font-size:14px;margin-top:6px;}
+  .final .cta{
+    display:inline-block;margin-top:18px;
+    font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.05em;font-weight:700;
+    background:#fff;color:var(--green);text-decoration:none;padding:13px 22px;transition:opacity .15s;
+  }
+  .final .cta:hover{opacity:.85;}
+
+  footer{padding:36px 0 60px;}
+  footer .eyebrow{color:var(--ink-faint);}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* Responsive */
+  @media (max-width:760px){
+    .wrap{padding:0 20px;}
+    section{padding:56px 0;}
+    h1{font-size:clamp(38px,10.5vw,60px);}
+    h2{font-size:clamp(28px,7vw,40px);}
+    .lead{font-size:17px;}
+    .features{grid-template-columns:1fr;gap:30px;}
+    .band,.final{grid-template-columns:1fr;}
+    .band .g,.band .card{padding:28px 24px;}
+    .band .card .cta,.final .cta{width:100%;text-align:center;padding:15px 20px;min-height:50px;box-sizing:border-box;}
+    .bank-demo{grid-template-columns:1fr;gap:24px;}
+    .statement{font-size:12px;}
+    .three,.steps{grid-template-columns:1fr;border-top:0;padding-top:0;}
+    .three .col,.steps .col{padding:24px 0;border-left:0;border-top:1px solid var(--panel-line);}
+    .three .col:first-child,.steps .col:first-child{border-top:0;}
+    .stat{grid-template-columns:1fr;gap:14px;padding-top:32px;}
+    .insight{grid-template-columns:1fr;gap:12px;}
+    .insight p{font-size:20px;}
+    .confid{grid-template-columns:1fr;gap:10px;}
+    .final{padding:36px 24px;}
+    .final .right{text-align:left;}
+    .chart-grid{height:200px;gap:4px;}
+    .chart-x{gap:4px;}
+    .chart-x .m{font-size:9px;}
+    .chart-x .pct{font-size:11px;}
+    .legend{gap:14px;}
+    .legend .spacer{margin-left:0;flex-basis:100%;}
+    .hbar{grid-template-columns:76px 1fr 52px;gap:10px;}
+    .hbar .lbl{font-size:14px;}
+    .topbar{flex-direction:column;gap:4px;}
+    .sec-head .eyebrow{gap:8px;}
+    /* wide tables keep readable width and scroll sideways */
+    .table-scroll .tbl{min-width:600px;}
+    .table-scroll .iva-tbl{min-width:560px;}
+    .scroll-hint{
+      display:block;font-family:'Space Mono',monospace;font-size:11px;
+      letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);
+      margin:0 0 2px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="wrap">
+  <div class="topbar">
+    <p class="eyebrow">Servicios de información contable · PYMES</p>
+    <p class="eyebrow year">Ejercicio 2025</p>
+  </div>
+  <hr class="rule">
+  <section class="hero">
+    <h1>
+      <span>Tus papeles</span>
+      <span>ya tienen</span>
+      <span>la respuesta.</span>
+      <span class="green">Transformalo</span>
+      <span class="green">en decisiones</span>
+    </h1>
+    <p class="lead">
+      Facturación, Libros IVA, extractos bancarios, DDJJ presentadas.
+      Todo eso ya existe en tu empresa y se usa una sola vez, para cumplir.
+      Con la misma documentación se puede armar información para decidir
+      — y detectar lo que se pasó por alto.
+    </p>
+    <hr class="rule">
+    <div class="features">
+      <div class="feat reveal">
+        <div class="num">01</div>
+        <h3>El extracto del banco, convertido en planilla</h3>
+        <p>Cada movimiento clasificado, conciliado y listo para imputar. Sin tipeo manual.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="num">02</div>
+        <h3>El resultado, mes a mes</h3>
+        <p>Ventas y margen desde los Libros IVA. En qué meses la empresa realmente gana.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="num">03</div>
+        <h3>El reporte que solo existe para tu negocio</h3>
+        <p>Margen por línea, horas por obra, costo por kilómetro. Lo que tu actividad necesita medir.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="num">04</div>
+        <h3>Lo declarado contra lo facturado</h3>
+        <p>El cruce que nadie hace. Once meses pueden cuadrar al peso y uno no.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="num">05</div>
+        <h3>De quién depende tu facturación</h3>
+        <p>Ventas por cliente, ordenadas por peso. El reporte más simple y el que más incomoda.</p>
+      </div>
+    </div>
+  </section>
+</header>
+
+<!-- ===== CTA BAND ===== -->
+<div class="wrap">
+  <div class="band reveal">
+    <div class="g">
+      <p class="eyebrow">Cómo empieza</p>
+      <h3>Un diagnóstico pago y acotado sobre tu propia documentación. No te obliga a seguir.</h3>
+    </div>
+    <div class="card">
+      <div class="name">CP. Agustin M. Bisonni</div>
+      <div class="role">Contador Público · CPCE Santa Fe</div>
+      <a class="cta" href="#empezar">Empezar el diagnóstico →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 01 EXTRACTO ===== -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow"><span class="idx">01</span><span class="label">Extracto PDF → Planilla conciliada</span></p>
+    <hr class="rule">
+    <h2>El extracto del banco,<br>convertido en planilla</h2>
+    <p class="lead">Los PDF de los bancos se procesan automáticamente: cada movimiento queda clasificado, conciliado y listo para imputar. Sin tipeo manual.</p>
+  </div>
+
+  <div class="bank-demo reveal">
+    <div class="statement">
+      <div class="st-head">BANCO — CUENTA CORRIENTE $<br>PERÍODO 03/2025</div>
+      <div class="row"><span>02/03 TRANSF INMED CR</span><span>1.482.900,00</span></div>
+      <div class="row"><span>03/03 DB IMP LEY 25413</span><span>8.897,40</span></div>
+      <div class="row"><span>05/03 PAGO PROVEEDORES</span><span>640.115,22</span></div>
+      <div class="row"><span>05/03 COM MANT CUENTA</span><span>14.500,00</span></div>
+      <div class="row"><span>11/03 DEP CHEQUE 24H</span><span>902.300,00</span></div>
+      <div class="row"><span>14/03 RET IIBB SIRCREB</span><span>21.744,08</span></div>
+      <div class="row"><span>19/03 TRANSF INMED DB</span><span>355.000,00</span></div>
+      <div class="row"><span>28/03 ACRED SIRO</span><span>1.190.402,55</span></div>
+      <div class="more">…184 movimientos</div>
+    </div>
+
+    <table class="tbl">
+      <thead>
+        <tr><th>Fecha</th><th>Concepto</th><th>Rubro</th><th class="r">Importe</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>02/03</td><td>Transferencia recibida</td><td class="rubro">Cobranzas</td><td class="r amt">1.482.900</td></tr>
+        <tr><td>03/03</td><td>Impuesto Ley 25.413</td><td class="rubro">Imp. y tasas</td><td class="r amt neg">(8.897)</td></tr>
+        <tr><td>05/03</td><td>Pago proveedores</td><td class="rubro">Compras</td><td class="r amt neg">(640.115)</td></tr>
+        <tr><td>05/03</td><td>Comisión mantenimiento</td><td class="rubro">Gastos banc.</td><td class="r amt neg">(14.500)</td></tr>
+        <tr><td>11/03</td><td>Depósito cheque</td><td class="rubro">Cobranzas</td><td class="r amt">902.300</td></tr>
+        <tr><td>14/03</td><td>Retención SIRCREB</td><td class="rubro">Ret. IIBB</td><td class="r amt neg">(21.744)</td></tr>
+        <tr><td>19/03</td><td>Transferencia enviada</td><td class="rubro">Pagos</td><td class="r amt neg">(355.000)</td></tr>
+        <tr><td>28/03</td><td>Acreditación cobranzas</td><td class="rubro">Cobranzas</td><td class="r amt">1.190.403</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="demo-tag">Datos de demostración</p>
+
+  <div class="stat reveal">
+    <div class="big">184</div>
+    <p>movimientos procesados en segundos. La misma carga a mano son entre dos y tres jornadas de trabajo por mes.</p>
+  </div>
+
+  <div class="insight reveal">
+    <p class="eyebrow muted">La herramienta</p>
+    <p>No es un mockup: corre sobre una aplicación propia que ya lee los PDF de diez entidades y suma bancos nuevos sin frenar el servicio.</p>
+  </div>
+
+  <div class="three reveal">
+    <div class="col">
+      <p class="eyebrow">📊 Extractos</p>
+      <p>El PDF del banco vuelve planilla de Excel: cada movimiento con fecha, concepto e importe, conciliado y listo para imputar.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">🧾 Comprobantes</p>
+      <p>Facturas y tickets leídos automáticamente y volcados a una planilla, sin cargar dato por dato.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">🌾 Agro</p>
+      <p>Liquidaciones de granos convertidas a Excel: gastos, retenciones y neto, cada concepto discriminado.</p>
+    </div>
+  </div>
+
+  <p class="eyebrow muted" style="margin-top:48px;">Entidades soportadas</p>
+  <div class="banklist reveal">
+    <span>Galicia</span><span>Santander</span><span>Macro</span><span>Nación</span><span>Credicoop</span><span>BBVA</span><span>Santa Fe</span><span>Coinag</span><span>Municipal de Rosario</span><span>Mercado Pago</span>
+  </div>
+  <p class="demo-tag">Se agregan bancos nuevos en caliente, sin reconstruir el sistema</p>
+</section>
+
+<!-- ===== 02 RESULTADO ===== -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow"><span class="idx">02</span><span class="label">Estado de resultados mensual · Ventas y margen</span></p>
+    <hr class="rule">
+    <h2>El resultado, mes a mes —<br>no en junio del año que viene</h2>
+    <p class="lead">Estado de Resultados armado directamente desde los Libros IVA. Se ve la evolución del margen y en qué meses la empresa realmente gana.</p>
+  </div>
+
+  <div class="chart reveal">
+    <div class="chart-grid" id="barChart"></div>
+    <div class="chart-x" id="barX"></div>
+    <div class="legend">
+      <span><span class="sw ink"></span> Ventas netas</span>
+      <span><span class="sw grn"></span> Margen bruto % — meses fuera de línea</span>
+      <span class="spacer demo-tag" style="margin-top:0;">Datos de demostración</span>
+    </div>
+  </div>
+
+  <div class="insight reveal">
+    <p class="eyebrow muted">Lo que se ve</p>
+    <p>Abril y julio facturan bien pero el margen se cae. Eso es una conversación de precios, no un dato contable.</p>
+  </div>
+</section>
+
+<!-- ===== 03 REPORTE A MEDIDA ===== -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow"><span class="idx">03</span><span class="label">Reporte a medida · Según el giro del negocio</span></p>
+    <hr class="rule">
+    <h2>Y el reporte que solo<br>existe para tu negocio</h2>
+    <p class="lead">No todos los negocios se miden igual. Con la misma documentación se arma el reporte que tu actividad necesita — el que hoy nadie te entrega porque no sale de ningún sistema estándar.</p>
+  </div>
+
+  <p class="eyebrow muted" style="margin-top:40px;">Ejemplo · Comercio mayorista: margen y rotación por línea</p>
+  <p class="scroll-hint">Deslizá la tabla →</p>
+  <div class="table-scroll reveal">
+  <table class="tbl rep-tbl" style="margin-top:14px;">
+    <thead>
+      <tr><th>Línea</th><th class="r">Ventas</th><th class="r">Costo</th><th class="r">Margen $</th><th class="r">Margen %</th><th class="r">Rotación</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Línea A</td><td class="r amt">12.480.300</td><td class="r amt neg">8.360.800</td><td class="r amt">4.119.500</td><td class="r"><span class="strong">33,0%</span></td><td class="r">6,1x</td></tr>
+      <tr><td>Línea B</td><td class="r amt">9.115.700</td><td class="r amt neg">7.020.100</td><td class="r amt">2.095.600</td><td class="r"><span class="strong">23,0%</span></td><td class="r">4,4x</td></tr>
+      <tr class="hl"><td><span class="strong">Línea C</span></td><td class="r amt">6.402.900</td><td class="r amt">5.760.400</td><td class="r amt">642.500</td><td class="r"><span class="strong">10,0%</span></td><td class="r"><span class="strong">1,8x</span></td></tr>
+      <tr><td>Línea D</td><td class="r amt">4.881.250</td><td class="r amt neg">3.171.800</td><td class="r amt">1.709.450</td><td class="r"><span class="strong">35,0%</span></td><td class="r">7,3x</td></tr>
+      <tr><td>Accesorios</td><td class="r amt">2.240.600</td><td class="r amt neg">1.523.600</td><td class="r amt">717.000</td><td class="r"><span class="strong">32,0%</span></td><td class="r">5,0x</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="demo-tag">Datos de demostración</p>
+
+  <div class="three reveal">
+    <div class="col">
+      <p class="eyebrow">Comercio</p>
+      <p>Margen y rotación por línea. Qué stock financia la caja y qué stock la consume.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Servicios</p>
+      <p>Horas cargadas contra horas facturadas, por cliente y por proyecto.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Construcción</p>
+      <p>Costo por obra al día, contra el certificado y el avance real de cada una.</p>
+    </div>
+  </div>
+
+  <div class="insight reveal">
+    <p class="eyebrow muted">Cómo se define</p>
+    <p>Se define en el diagnóstico: primero se mira la documentación, después se decide qué vale la pena medir todos los meses.</p>
+  </div>
+</section>
+
+<!-- ===== 04 CRUCE IVA / DDJJ ===== -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow"><span class="idx">04</span><span class="label">Cruce Libro IVA Ventas ↔ DDJJ IIBB presentada</span></p>
+    <hr class="rule">
+    <h2>El control que nadie hace: lo<br>declarado contra lo facturado</h2>
+    <p class="lead">Mes a mes, el Libro IVA Ventas contra la DDJJ de Ingresos Brutos efectivamente presentada. Once meses pueden cuadrar al peso y uno no.</p>
+  </div>
+
+  <p class="scroll-hint" style="margin-top:40px;">Deslizá la tabla →</p>
+  <div class="table-scroll reveal" style="margin-top:14px;">
+  <table class="tbl iva-tbl">
+    <thead>
+      <tr><th>Período</th><th class="r">Libro IVA Ventas</th><th class="r">Base imponible DDJJ</th><th class="r">Diferencia</th><th class="r">Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>01/2025</td><td class="r amt">18.402.115</td><td class="r amt">18.402.115</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr><td>02/2025</td><td class="r amt">19.877.430</td><td class="r amt">19.877.430</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr><td>03/2025</td><td class="r amt">23.115.980</td><td class="r amt">23.115.980</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr><td>04/2025</td><td class="r amt">21.640.302</td><td class="r amt">21.640.302</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr class="revisar"><td>05/2025</td><td class="r amt">26.418.744</td><td class="r amt">0</td><td class="r amt">26.418.744</td><td class="status">REVISAR</td></tr>
+      <tr><td>06/2025</td><td class="r amt">28.903.117</td><td class="r amt">28.903.117</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr><td>07/2025</td><td class="r amt">24.771.560</td><td class="r amt">24.771.560</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+      <tr><td>08/2025</td><td class="r amt">30.114.288</td><td class="r amt">30.114.288</td><td class="r">—</td><td class="status">Cuadra</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="demo-tag">Datos de demostración</p>
+
+  <div class="insight reveal">
+    <p class="eyebrow muted">Por qué importa</p>
+    <p>Una DDJJ presentada en cero no genera ningún aviso. Aparece cuando llega la intimación, con intereses y multa encima.</p>
+  </div>
+</section>
+
+<!-- ===== 05 CONCENTRACIÓN ===== -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow"><span class="idx">05</span><span class="label">Concentración de ventas · Ejercicio 2025</span></p>
+    <hr class="rule">
+    <h2>De quién depende<br>tu facturación</h2>
+    <p class="lead">Ventas por cliente, ordenadas por peso. Es el reporte más simple de todos y el que más incomoda.</p>
+  </div>
+
+  <div class="hbars reveal">
+    <div class="hbar"><span class="lbl">Cliente A</span><div class="track"><div class="fill" style="width:38.4%"></div></div><span class="val">38,4%</span></div>
+    <div class="hbar"><span class="lbl">Cliente B</span><div class="track"><div class="fill" style="width:22.1%"></div></div><span class="val">22,1%</span></div>
+    <div class="hbar"><span class="lbl">Cliente C</span><div class="track"><div class="fill ink" style="width:12.2%"></div></div><span class="val">12,2%</span></div>
+    <div class="hbar"><span class="lbl">Cliente D</span><div class="track"><div class="fill ink" style="width:8.1%"></div></div><span class="val">8,1%</span></div>
+    <div class="hbar"><span class="lbl">Otros (23)</span><div class="track"><div class="fill grey" style="width:19.2%"></div></div><span class="val">19,2%</span></div>
+  </div>
+  <p class="demo-tag">Datos de demostración</p>
+
+  <div class="insight reveal">
+    <p class="eyebrow muted">Lo que se ve</p>
+    <p>Dos clientes son el 60% de las ventas. Perder uno no es una mala noticia: es una empresa distinta.</p>
+  </div>
+</section>
+
+<!-- ===== CÓMO TRABAJAMOS ===== -->
+<section class="wrap" id="empezar">
+  <div class="topbar" style="padding-top:0;">
+    <p class="eyebrow" style="color:var(--ink);">Cómo trabajamos</p>
+    <p class="eyebrow year">Tres pasos, cada uno cerrado</p>
+  </div>
+  <hr class="rule">
+  <div class="steps reveal">
+    <div class="col">
+      <p class="eyebrow">Primero</p>
+      <h3>Diagnóstico</h3>
+      <p>Reviso tu documentación del último ejercicio y te devuelvo por escrito qué encontré. Es pago, acotado, y no te obliga a seguir.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Después</p>
+      <h3>Implementación</h3>
+      <p>Armo el reporte, el cruce o la automatización que haga falta. Entregable concreto y precio cerrado.</p>
+    </div>
+    <div class="col">
+      <p class="eyebrow">Si querés</p>
+      <h3>Mantenimiento</h3>
+      <p>Que siga funcionando mes a mes, con la información actualizada. Abono mensual.</p>
+    </div>
+  </div>
+
+  <div class="why reveal">
+    <h2>Por qué yo</h2>
+    <p>Soy Contador Público matriculado y además desarrollo las herramientas que uso. No soy un programador que aprendió de impuestos y gestión ni un contador que compró un software: hago estas liquidaciones todos los días y construí estas herramientas porque las necesitaba.</p>
+    <div class="confid">
+      <p class="eyebrow">Confidencialidad</p>
+      <p>Trabajo bajo secreto profesional. Tu documentación no se comparte, no se usa como ejemplo y no sale de tu carpeta. Todos los números de esta presentación son ficticios.</p>
+    </div>
+  </div>
+
+  <div class="final reveal">
+    <div class="left">
+      <p class="eyebrow">El primer paso</p>
+      <h2>Mandame la documentación del último ejercicio y te digo qué se puede leer en ella.</h2>
+    </div>
+    <div class="right">
+      <div class="name">CP. Agustin M. Bisonni</div>
+      <div class="role">Contador Público · CPCE Santa Fe</div>
+      <a class="cta" href="#empezar">Solicitar el diagnóstico →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <hr class="rule-thin" style="margin-bottom:24px;">
+  <p class="eyebrow">AllContable · Servicios de información contable para PYMES · Datos de demostración ficticios</p>
+</footer>
+
+<script>
+  // Build monthly bar chart
+  (function(){
+    const data = [
+      {m:'ENE',v:19,pct:'34%',warn:false},
+      {m:'FEB',v:20,pct:'35%',warn:false},
+      {m:'MAR',v:23,pct:'33%',warn:false},
+      {m:'ABR',v:22,pct:'21%',warn:true},
+      {m:'MAY',v:26,pct:'34%',warn:false},
+      {m:'JUN',v:29,pct:'35%',warn:false},
+      {m:'JUL',v:25,pct:'19%',warn:true},
+      {m:'AGO',v:30,pct:'33%',warn:false},
+      {m:'SEP',v:28,pct:'34%',warn:false},
+      {m:'OCT',v:31,pct:'33%',warn:false},
+      {m:'NOV',v:33,pct:'34%',warn:false},
+      {m:'DIC',v:36,pct:'35%',warn:false}
+    ];
+    const max = 40;
+    const chart = document.getElementById('barChart');
+    const xrow = document.getElementById('barX');
+    data.forEach(d=>{
+      const bar = document.createElement('div');
+      bar.className = 'bar' + (d.warn?' dim':'');
+      bar.style.height = ((d.v/max)*100)+'%';
+      if(d.warn){ const cap=document.createElement('div'); cap.className='cap'; bar.appendChild(cap); }
+      chart.appendChild(bar);
+
+      const cell = document.createElement('div');
+      cell.innerHTML = '<div class="m">'+d.m+'</div><div class="pct'+(d.warn?' warn':'')+'">'+d.pct+'</div>';
+      xrow.appendChild(cell);
+    });
+  })();
+
+  // Reveal on scroll
+  (function(){
+    const els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){ els.forEach(e=>e.classList.add('in')); return; }
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:.12});
+    els.forEach(e=>io.observe(e));
+  })();
+</script>
+</body>
+</html>
