@@ -49,13 +49,10 @@
   .masthead .eyebrow{color:var(--ink);}
   .masthead .who{display:flex;gap:10px;align-items:baseline;}
   .masthead .who .dot,.masthead .yr{color:var(--green);}
-  .masthead.hd{position:relative;background:none;border-radius:0;padding:6px 0;align-items:center;}
-  .masthead.hd::before{content:"";position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);
-    height:3px;background:var(--rule);z-index:0;}
-  .masthead.hd > *{position:relative;z-index:1;}
-  .masthead.hd .eyebrow{background:#e9f1ec;color:var(--green-dark);padding:6px 13px;border-radius:4px;font-size:13px;}
-  .masthead.hd .yr{background:var(--paper);color:var(--green-dark);padding:6px 13px;}
-  .masthead.hd + .rule{display:none;}
+  .hd-title{display:inline-block;background:#e9f1ec;color:var(--green-dark);
+    padding:6px 13px;border-radius:4px;font-size:13px;}
+  .hd-rule{margin:12px 0;}
+  .hd-sub{display:block;color:var(--green-dark);}
 
   .hero{padding-top:10px;padding-bottom:0;}
   .hero h1 span{display:block;}
@@ -288,11 +285,6 @@
     .legend .spacer{margin-left:0;flex-basis:100%;}
     .hbar{grid-template-columns:84px 1fr 52px;gap:12px;}
     .masthead{flex-direction:column;gap:4px;}
-    .masthead.hd{padding:0;align-items:flex-start;}
-    .masthead.hd::before{display:none;}
-    .masthead.hd + .rule{display:block;}
-    .masthead.hd .yr{background:none;padding:0;}
-    .masthead.hd .eyebrow{display:inline-block;padding:5px 11px;font-size:12px;}
     .globo-head{padding:24px 60px 12px 22px;}
     .globo-body{padding:18px 22px 28px;}
     .stik .cur{display:none;}
@@ -373,11 +365,9 @@
 
 <!-- QUÉ HAGO (arriba, apenas termina el título) -->
 <section class="wrap quehago">
-  <div class="masthead hd">
-    <p class="eyebrow">Qué hago</p>
-    <p class="eyebrow yr">Consultoría · Automatización · Análisis de datos</p>
-  </div>
-  <hr class="rule">
+  <p class="eyebrow hd-title">Qué hago</p>
+  <hr class="rule hd-rule">
+  <p class="eyebrow hd-sub">Consultoría · Automatización · Análisis de datos</p>
   <p class="lead" style="margin-top:28px;">Ayudo a que la información que tu empresa ya genera —la contable y la que no— trabaje para vos. En concreto, tres cosas.</p>
   <div class="three reveal" style="margin-top:30px;">
     <div class="col"><p class="eyebrow">Consultoría</p><p>Ordeno tus números y te ayudo a decidir con ellos: precios, costos, rentabilidad y los controles que hoy no se hacen.</p></div>
@@ -388,11 +378,9 @@
 
 <!-- EL RECORRIDO (el índice, hilado como historia) -->
 <section class="wrap">
-  <div class="masthead hd">
-    <p class="eyebrow">El recorrido</p>
-    <p class="eyebrow yr">Tocá cada punto para ver el detalle</p>
-  </div>
-  <hr class="rule">
+  <p class="eyebrow hd-title">El recorrido</p>
+  <hr class="rule hd-rule">
+  <p class="eyebrow hd-sub">Tocá cada punto para ver el detalle</p>
   <p class="lead" style="margin-top:28px;">Así se ve en tu empresa. Primero libero tus datos del trabajo manual; después los leo para que muestren lo que importa. Cada punto abre un ejemplo real.</p>
   <div class="contents">
     <p class="part-label">Las herramientas — que la carga se haga sola</p>
@@ -413,11 +401,9 @@
 
 <!-- CÓMO TRABAJAMOS -->
 <section class="wrap" id="empezar">
-  <div class="masthead hd">
-    <p class="eyebrow">Cómo trabajamos</p>
-    <p class="eyebrow yr">Tres pasos, cada uno cerrado</p>
-  </div>
-  <hr class="rule">
+  <p class="eyebrow hd-title">Cómo trabajamos</p>
+  <hr class="rule hd-rule">
+  <p class="eyebrow hd-sub">Tres pasos, cada uno cerrado</p>
   <div class="steps reveal">
     <div class="col"><p class="eyebrow">Primero</p><h3>Diagnóstico</h3><p>Reviso tus datos y te devuelvo por escrito qué encontré. Pago, acotado, y no te obliga a seguir.</p></div>
     <div class="col"><p class="eyebrow">Después</p><h3>Implementación</h3><p>Armo el reporte, el cruce o la automatización que haga falta. Entregable concreto y precio cerrado.</p></div>
